@@ -4,7 +4,7 @@
 
 ![Microsoft Build 2026](https://img.shields.io/badge/Microsoft_Build-2026-0078D4?logo=microsoft&logoColor=white) ![Next.js 14](https://img.shields.io/badge/Next.js-14-black?logo=next.js&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-Auth-3ECF8E?logo=supabase&logoColor=white)
 
-[Launch Live Dashboard](#) &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; [Access Documentation](#)
+[Launch Live Dashboard](https://agentra-azure.vercel.app/) &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; [Access Documentation](#)
 
 ## 📊 Telemetry System Architecture
 The diagram below maps the dynamic telemetry cycle, showing how raw agent operations sync to the control plane and reflect live in the Next.js Dashboard:
