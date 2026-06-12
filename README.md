@@ -1,137 +1,74 @@
-# Agentra 🛡️
-🏆 **Created for Microsoft Build AI 2026 Hackathon**
-*Secure Intelligence for Autonomous Agents via Zero-Trust Architecture*
+# Agentra
 
-![Microsoft Build 2026](https://img.shields.io/badge/Microsoft_Build-2026-0078D4?logo=microsoft&logoColor=white) ![Next.js 14](https://img.shields.io/badge/Next.js-14-black?logo=next.js&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-Auth-3ECF8E?logo=supabase&logoColor=white)
+## 📖 Project Description
+Agentra is a robust identity portal and authentication system built for modern web applications. The project provides a secure, production-ready environment featuring comprehensive Supabase-based authentication, including email and Google OAuth integration. 
 
-[Launch Live Dashboard](https://agentra-azure.vercel.app/) &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; [Access Documentation](#)
+Designed with security and user experience in mind, Agentra implements server-side SSR middleware for strict route protection, a secure demo bypass mode for presentations, and a highly polished UI that delivers a seamless onboarding and login experience. It was developed to meet professional standards and is optimized for hackathon submissions.
 
-## 📊 Telemetry System Architecture
-The diagram below maps the dynamic telemetry cycle, showing how raw agent operations sync to the control plane and reflect live in the Next.js Dashboard:
+## 🚀 Setup Instructions
 
-```mermaid
-graph TD
-    User([Security Analyst]) --> |Authenticates via OAuth| UI[Next.js Frontend]
-    UI --> |Route Protection| Middleware[Next.js SSR Middleware]
-    Middleware --> |Verifies Cookies/PKCE| Supabase[Supabase Auth / Postgres]
-    
-    UI --> |Monitors| Dashboard[Agentra Dashboard]
-    
-    subgraph Agentra Core Platform
-        Dashboard --> Registry[Agent Registry]
-        Dashboard --> ThreatCenter[Threat Center]
-        Dashboard --> Policy[Policy Engine]
-        Dashboard --> DNA[Behavioral DNA]
-    end
-    
-    Supabase --> |Auth State| Core[Application State]
-```
+Follow these steps to run the Agentra application locally:
 
-## 📂 Project Directory Structure
-```text
-Agentra/
-├── app/                     # Next.js App Router (Frontend Dashboard & Auth)
-│   ├── auth/                # Supabase SSR Login & Google OAuth handling
-│   └── dashboard/           # Protected routes for Agent Monitoring
-├── components/              # Reusable UI components & Cyber Aesthetics
-│   ├── cyber/               # Custom glassmorphic / animated components
-│   └── ui/                  # Base Radix UI components
-├── lib/                     # SDKs, Contexts, and Utilities
-│   ├── auth-context.tsx     # Global Authentication State
-│   └── supabase.ts          # Supabase Browser Client Config
-├── middleware.ts            # Edge middleware for Zero-Trust routing
-├── package.json             # NPM dependencies
-└── README.md                # This manual
-```
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repository-url>
+   cd Agentra
+   ```
 
-## ⚙️ Prerequisites
-- Node.js (v18.0.0 or higher)
-- Git
-- A free [Supabase](https://supabase.com/) Account
+2. **Install dependencies:**
+   Ensure you have Node.js (v18+) installed. Then run:
+   ```bash
+   npm install
+   ```
 
-## 🚀 Step 1: Initialize Supabase DB
-Sign up for a free database project at Supabase.
-Open the SQL Editor in your Supabase dashboard and run the query below to construct the tables for your Agentra Security Registry:
+3. **Environment Variables:**
+   Create a `.env.local` file in the root directory and add your Supabase credentials:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-```sql
--- Create database tables
-CREATE TABLE agents (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  type TEXT NOT NULL,
-  status TEXT DEFAULT 'Offline',
-  trust_score INT DEFAULT 100,
-  risk_level TEXT DEFAULT 'Low',
-  last_action TEXT
-);
+4. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:3000`.
 
-CREATE TABLE threats (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  agent_id TEXT REFERENCES agents(id) ON DELETE CASCADE,
-  threat_type TEXT,
-  description TEXT,
-  severity TEXT,
-  timestamp TIMESTAMPTZ DEFAULT NOW()
-);
+5. **Build for production:**
+   ```bash
+   npm run build
+   npm start
+   ```
 
-CREATE TABLE policies (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  description TEXT,
-  enforcement_level TEXT DEFAULT 'Strict'
-);
+## 📦 Dependencies
 
--- Seed default agents
-INSERT INTO agents (id, name, type, status, trust_score, risk_level, last_action) VALUES
-('agent-sec-01', 'Security Copilot', 'Threat Analysis', 'Active', 100, 'Low', 'System standby'),
-('agent-dev-02', 'Dev Copilot', 'Code Generation', 'Offline', 100, 'Low', 'System standby'),
-('agent-data-03', 'Data Warden', 'Database Integrity', 'Active', 95, 'Medium', 'Analyzing logs');
+The project is built on a modern, high-performance tech stack:
+- **Core Framework:** Next.js (v13.5) with App Router, React (v18), TypeScript
+- **Authentication & Backend:** Supabase (`@supabase/supabase-js`, `@supabase/ssr`)
+- **Styling & UI:** Tailwind CSS, Radix UI Primitives, `shadcn/ui`, Framer Motion (for animations)
+- **Forms & Validation:** React Hook Form, Zod, `@hookform/resolvers`
+- **Data Visualization:** Recharts
+- **Utilities:** date-fns, sonner (for toast notifications), lucide-react (icons)
 
-INSERT INTO policies (id, name, description, enforcement_level) VALUES
-('pol-01', 'Zero Trust Isolation', 'Automatically sandbox agents with trust scores below 50.', 'Strict'),
-('pol-02', 'Data Exfiltration Guard', 'Block unauthorized external network requests.', 'Strict');
-```
+## 🏗️ Architecture Overview
 
-## 💻 Step 2: Running Locally
+Agentra employs a modern Next.js server-rendered architecture:
+- **Frontend Layer:** Utilizes Next.js App Router for optimized routing and layout management. The UI is component-driven, leveraging Tailwind CSS for utility-first styling and Framer Motion for fluid animations.
+- **Authentication Flow:** Deeply integrated with Supabase. It uses both client-side and server-side rendering (SSR) techniques to handle sessions. Email/Password and Google OAuth are supported natively.
+- **Middleware Security:** Next.js Middleware acts as a gatekeeper, verifying Supabase authentication tokens on the edge before rendering protected routes, ensuring data security and preventing unauthorized access.
+- **State & Forms:** Client-side interactions and complex forms are handled by React Hook Form with Zod schema validation to ensure robust data integrity before making API requests.
 
-**1. Clone & Install**
-```bash
-git clone https://github.com/AyaanB24/Agentra.git
-cd Agentra/Agentra
-npm install
-```
+## 🤖 AI Tools Used
 
-**2. Configure Environment Keys**
-Create a file named `.env.local` inside the root folder with your Supabase tokens:
+This project was developed with the assistance of advanced AI coding tools:
+- **Antigravity (Gemini 3.1 Pro):** Acted as an autonomous coding assistant to implement complex Supabase SSR authentication workflows, resolve Google OAuth callback configuration errors, set up secure middleware route protection, and architect the overall identity lifecycle.
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-```
-*(Never commit this `.env.local` file to Git—it is ignored automatically by our `.gitignore` to keep credentials secure!)*
+## 👥 Team Member Details
 
-**3. Run the Next.js Client**
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+| Name | Role | Responsibilities |
+| :--- | :--- | :--- |
+| **[Your Name]** | Lead Engineer | Next.js architecture, Supabase integration, SSR middleware security, and UI/UX implementation. |
+| **[Member 2 Name]** | [Role] | [Brief description of responsibilities] |
+| **[Member 3 Name]** | [Role] | [Brief description of responsibilities] |
 
-## ☁️ Step 3: Cloud Deployment
-- **Frontend**: Deployed on Vercel pointing to the `Agentra` root folder. Environment variables `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are entered securely in the Vercel Dashboard.
-- **Database**: Hosted securely on Supabase, leveraging PostgreSQL Row Level Security (RLS).
-
-## 🔒 Security Architecture FAQ (Is this configuration safe?)
-**Question**: Does putting our live Vercel Dashboard link directly in the README create a security vulnerability?
-
-**Answer**: No, it is 100% secure. Here is why:
-- **No Secret Exposures**: All private database server passwords, Google API credentials, and Azure OpenAI keys are stored securely as environment variables inside Vercel's and Supabase's admin panels. They are never committed to GitHub.
-- **Public Keys are Safe**: Supabase's Client URL and Anon Key (`NEXT_PUBLIC_...`) are designed to be public. Supabase secures the database tables using Row Level Security (RLS) policies inside PostgreSQL. Anyone can see the URL, but they cannot read or write data unless they successfully authenticate.
-- **Strict Middleware**: The Next.js edge `middleware.ts` strictly enforces that unauthenticated users can never access the dashboard routes.
-
-## 🛠️ Mitigations & Simulation Tests
-- **Onboarding**: Click *Initialize Security System*, register a new account, or use *Continue with Google* to instantly log in as a Security Analyst.
-- **Demo Bypass Mode**: Judges and reviewers can click *Launch Demo Mode* on the authentication page to instantly bypass the login screen using a secure, temporary browser cookie without needing to create an account.
-- **Zero-Trust Dashboard**: Once authenticated, the dashboard will display the live Swarm Topology, highlighting active agents and real-time threat telemetry.
-
-## 👥 Authors & Credits
-Crafted with 🛡️ by **Ayaan & Asiya**. Created for **Microsoft Build AI 2026 Hackathon**.
+*(Please update the table above with your actual team member names and specific roles before your hackathon submission.)*
