@@ -1,9 +1,15 @@
 # Agentra
 
 ## 📖 Project Description
-Agentra is a robust identity portal and authentication system built for modern web applications. The project provides a secure, production-ready environment featuring comprehensive Supabase-based authentication, including email and Google OAuth integration. 
+Agentra is a centralized AI Security Operating System designed to secure, monitor, and govern autonomous AI systems. It provides a comprehensive identity portal and security infrastructure built for modern web applications. The project enables proactive security audits, threat detection, trust evaluation, and policy enforcement for AI agents, ensuring they operate safely and reliably within organizational boundaries.
 
-Designed with security and user experience in mind, Agentra implements server-side SSR middleware for strict route protection, a secure demo bypass mode for presentations, and a highly polished UI that delivers a seamless onboarding and login experience. It was developed to meet professional standards and is optimized for hackathon submissions.
+## 🚨 Problem Statement
+
+As AI agents become increasingly autonomous, they introduce new security risks such as prompt injection attacks, data leakage, unauthorized tool usage, identity spoofing, and policy violations.
+
+Organizations currently lack a unified platform to continuously monitor, test, validate, and govern AI agents throughout their lifecycle. Existing security solutions provide limited visibility into agent behavior and trustworthiness.
+
+Agentra addresses this challenge by providing a centralized AI Security Operating System that enables proactive security audits, threat detection, trust evaluation, and policy enforcement for autonomous AI systems.
 
 ## 🚀 Setup Instructions
 
@@ -11,7 +17,7 @@ Follow these steps to run the Agentra application locally:
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/AyaanB24/Agentra.git
    cd Agentra
    ```
 
@@ -22,7 +28,7 @@ Follow these steps to run the Agentra application locally:
    ```
 
 3. **Environment Variables:**
-   Create a `.env.local` file in the root directory and add your Supabase credentials:
+   Create a `.env.local` file in the root directory and add your necessary environment variables, including Supabase credentials:
    ```env
    NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -40,35 +46,132 @@ Follow these steps to run the Agentra application locally:
    npm start
    ```
 
-## 📦 Dependencies
+## 📦 Major Dependencies
 
-The project is built on a modern, high-performance tech stack:
-- **Core Framework:** Next.js (v13.5) with App Router, React (v18), TypeScript
-- **Authentication & Backend:** Supabase (`@supabase/supabase-js`, `@supabase/ssr`)
-- **Styling & UI:** Tailwind CSS, Radix UI Primitives, `shadcn/ui`, Framer Motion (for animations)
-- **Forms & Validation:** React Hook Form, Zod, `@hookform/resolvers`
-- **Data Visualization:** Recharts
-- **Utilities:** date-fns, sonner (for toast notifications), lucide-react (icons)
+**Frontend**
+- React 19
+- TypeScript
+- TanStack Start
+- TanStack Router
+- Tailwind CSS
+- Radix UI
+- Lucide React
+
+**State Management**
+- TanStack Query
+- React Hook Form
+- Zod
+
+**Database**
+- SQLite
+- LibSQL
+
+**Utilities**
+- jsPDF
+- html2canvas
+- date-fns
+
+**Developer Tools**
+- ESLint
+- Prettier
 
 ## 🏗️ Architecture Overview
 
-Agentra employs a modern Next.js server-rendered architecture:
-- **Frontend Layer:** Utilizes Next.js App Router for optimized routing and layout management. The UI is component-driven, leveraging Tailwind CSS for utility-first styling and Framer Motion for fluid animations.
-- **Authentication Flow:** Deeply integrated with Supabase. It uses both client-side and server-side rendering (SSR) techniques to handle sessions. Email/Password and Google OAuth are supported natively.
-- **Middleware Security:** Next.js Middleware acts as a gatekeeper, verifying Supabase authentication tokens on the edge before rendering protected routes, ensuring data security and preventing unauthorized access.
-- **State & Forms:** Client-side interactions and complex forms are handled by React Hook Form with Zod schema validation to ensure robust data integrity before making API requests.
+Agentra follows a multi-agent security architecture designed specifically for securing autonomous AI systems.
 
-## 🤖 AI Tools Used
+### Core Workflow
 
-This project was developed with the assistance of advanced AI coding tools:
-- **Antigravity (Gemini 3.1 Pro):** Acted as an autonomous coding assistant to implement complex Supabase SSR authentication workflows, resolve Google OAuth callback configuration errors, set up secure middleware route protection, and architect the overall identity lifecycle.
+```text
+User
+↓
+Agentra Dashboard
+↓
+Security Audit Engine
+↓
+Red Team Agent
+↓
+Judge Agent
+↓
+Blue Team Agent
+↓
+Trust Engine
+↓
+Security Reports & Logs
+```
 
-## 👥 Team Member Details
+### Key Modules
 
-| Name | Role | Responsibilities |
-| :--- | :--- | :--- |
-| **[Your Name]** | Lead Engineer | Next.js architecture, Supabase integration, SSR middleware security, and UI/UX implementation. |
-| **[Member 2 Name]** | [Role] | [Brief description of responsibilities] |
-| **[Member 3 Name]** | [Role] | [Brief description of responsibilities] |
+- **Dashboard Overview:** Centralized monitoring of all connected agents.
+- **Agent Registry:** Secure onboarding and identity management for autonomous entities.
+- **Threat Center:** Real-time threat detection and alerting.
+- **Security Lab:** Sandboxed environment for running adversarial simulations.
+- **Policy Engine:** Enforcement of behavioral rules and access controls.
+- **Behavioral DNA:** Continuous profiling of agent behavior to detect anomalies.
+- **Audit Logs:** Immutable records of agent actions and decisions.
+- **Trust Engine:** Dynamic risk scoring and trust evaluation models.
 
-*(Please update the table above with your actual team member names and specific roles before your hackathon submission.)*
+## 🤖 AI Integration & Tools Used
+
+Agentra leverages AI-driven security workflows to evaluate and govern autonomous agents.
+
+### AI Components
+
+- **Red Team Agent**
+  - Simulates adversarial attacks
+  - Generates prompt injection scenarios
+  - Tests agent resilience
+
+- **Judge Agent**
+  - Evaluates attack outcomes
+  - Performs risk analysis
+  - Produces explainable security reasoning
+
+- **Blue Team Agent**
+  - Applies defensive controls
+  - Detects policy violations
+  - Monitors tool usage
+
+- **Trust Engine**
+  - Calculates dynamic trust scores
+  - Tracks behavioral drift
+  - Generates security recommendations
+
+### AI Technologies
+
+- Microsoft Azure AI
+- Azure OpenAI Service
+- Prompt Engineering
+- Multi-Agent Architecture
+- Behavioral Analysis
+- Trust Scoring Models
+- Security Audit Simulation
+
+## 👥 Team Members & Roles
+
+### Ayaan Bargir
+**Role:**
+- Project Lead
+- Full Stack Development
+- System Architecture
+- AI Workflow Design
+- Security Lab Development
+
+### Asiya
+**Role:**
+- UI/UX Design
+- Research & Documentation
+- Testing & Validation
+- Presentation Design
+
+**Team Name:** Agentra Labs  
+*Built for Microsoft Build AI Hackathon 2026.*
+
+## 🚀 Future Scope
+
+- Enterprise AI Governance
+- Multi-Agent Security Monitoring
+- Automated Compliance Audits
+- SIEM Integration
+- Cross-Agent Trust Networks
+- Self-Healing Security Policies
+- Advanced Threat Intelligence
