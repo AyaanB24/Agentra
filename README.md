@@ -163,7 +163,7 @@ Agentra leverages AI-driven security workflows to evaluate and govern autonomous
 - Testing & Validation
 - Presentation Design
 
-**Team Name:** Agentra Labs  
+**Team Name:** TEAM AGENTRA  
 *Built for Microsoft Build AI Hackathon 2026.*
 
 ## 🚀 Future Scope
